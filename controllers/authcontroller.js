@@ -1,3 +1,4 @@
+import { Console } from "console";
 import User from "../models/userSchema.js";
 import sendResetPasswordEmail from "../services/emailservice.js";
 import bcrypt from "bcrypt";
@@ -62,14 +63,16 @@ export const forgotPassword = async (req, res) => {
 
 export const resetPassword = async (req, res) => {
   const { newPassword } = req.body;
+  console.log("🚀 ~ file: authcontroller.js:66 ~ resetPassword ~ newPassword:", newPassword)
   const { token } = req.params;
+  console.log("🚀 ~ file: authcontroller.js:67 ~ resetPassword ~ token:", token)
 
   try {
     const user = await User.findOne({
       resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() },
+    //  resetPasswordExpires: { $gt: Date.now() },
     });
-
+console.log(user);
     if (!user) {
       return res.status(400).json({ message: "Invalid or expired token" });
     }

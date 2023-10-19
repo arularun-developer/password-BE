@@ -12,6 +12,7 @@ app.use(express.json())
 
 app.use("/user",userRouter)
 
+
 connectDB();
 
 app.listen(PORT, () => {
